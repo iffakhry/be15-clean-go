@@ -18,4 +18,5 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            whoami
+            cd /home/fakhry/be15-clean-go
+            git pull origin main
