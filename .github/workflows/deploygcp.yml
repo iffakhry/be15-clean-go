@@ -20,3 +20,8 @@ jobs:
           script: |
             cd /home/fakhry/be15-clean-go
             git pull origin main
+            docker stop beContainer
+            docker rm beContainer
+            docker rmi be15-images
+            docker build -t be15-images:latest .
+            docker run -d -p 80:80 -e JWT_KEY=${{ secrets.JWT_KEY }} -e DBUSER=${{ secrets.DBUSER }} -e DBPASS=${{ secrets.DBPASS }} -e DBHOST=${{ secrets.DBHOST }} -e DBPORT=${{ secrets.DBPORT }} -e DBNAME=${{ secrets.DBNAME }} --name beContainer be15-images:latest
